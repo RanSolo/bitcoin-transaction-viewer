@@ -13,6 +13,6 @@ export async function GET(request: NextRequest, {params: { address }}: Props) {
     });
 
     const body = await addresses.getAddressTxs({ address });
-    
+
     return NextResponse.json(body, { status: 200});
 }
