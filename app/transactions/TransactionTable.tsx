@@ -10,7 +10,13 @@ interface Props {
   transactions: Tx[];
 }
 const TransactionTable = async ({ address, transactions }: Props) => {
-  const response = await fetch("http://localhost:3000/api/users/1", { cache: "no-store" });
+  let baseURL = "";
+  if (process.env.NODE_ENV === "development") {
+    baseURL = "http://localhost:3000";
+  } else {
+    baseURL = "https://bitcoin-transaction-viewer-rho.vercel.app/";
+  }
+  const response = await fetch(`${baseURL}/api/users/1`, { cache: "no-store" });
   const currentUser = await response.json();
   console.log("currentUser", currentUser);
   console.log("response", response);

@@ -7,9 +7,16 @@ interface Props {
   params: { address: string };
   searchParams: { address: string };
 }
+let baseURL = "";
+
+if (process.env.NODE_ENV === "development") {
+  baseURL = "http://localhost:3000";
+} else {
+  baseURL = "https://bitcoin-transaction-viewer-rho.vercel.app/";
+}
 
 const TransactionsByAddress = async ({ params, searchParams: { address: searchAddress } }: Props) => {
-  const response = await fetch(`http:localhost:3000/api/transactions/${searchAddress}`);
+  const response = await fetch(`${baseURL}/api/transactions/${searchAddress}`);
 
   if (response.status !== 200) {
     return (
