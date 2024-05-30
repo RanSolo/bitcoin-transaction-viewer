@@ -24,7 +24,7 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
     try {
       response = await axios({
         method: "PUT",
-        url: `${baseURL}/api/users/${user.id}`,
+        url: `/api/users/${userToUpdate?.id}`,
         headers: {
           "Content-Type": "application/json"
         },
@@ -48,12 +48,6 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
 
     return response.data;
   };
-  useEffect(
-    () => {
-      console.log("user", user);
-    },
-    [user]
-  );
   // const mutation = useMutation({
   //   mutationFn: updateUserMutation,
   //   onMutate: async variables => {
@@ -70,7 +64,7 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
   //   }
   // });
 
-  const isFavorite = user.favoriteTransactions.includes(transactionId);
+  const isFavorite = user?.favoriteTransactions.includes(transactionId);
   console.log("isFavorite", isFavorite);
 
   return (

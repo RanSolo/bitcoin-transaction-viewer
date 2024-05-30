@@ -16,14 +16,14 @@ const TransactionTable = async ({ address, transactions }: Props) => {
   } else {
     baseURL = "https://bitcoin-transaction-viewer-rho.vercel.app/";
   }
-  let response = { data: { id: "", favoriteTransactions: [] } };
+  let response = {};
   try {
     response = await axios.get(`${baseURL}/api/users/1`);
   } catch (error) {
     console.log("Error: ", error);
   }
-  const currentUser = response.data;
-
+  console.log("response", response);
+  if (!response) return;
   return (
     <table className="table table-bordered">
       <thead>
@@ -50,7 +50,10 @@ const TransactionTable = async ({ address, transactions }: Props) => {
           return (
             <tr key={transaction.txid}>
               <td>
-                <FavoriteCheckbox user={currentUser} transactionId={transaction.txid} />
+                <FavoriteCheckbox
+                  user={(response as { data: { id: string; favoriteTransactions: string[] } }).data}
+                  transactionId={transaction.txid}
+                />
               </td>
               <td>{transaction.fee}</td>
               <td>${transaction.vout[0].value.toFixed(2)}</td>
