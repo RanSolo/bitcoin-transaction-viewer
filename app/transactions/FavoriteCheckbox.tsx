@@ -73,6 +73,7 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
       type="checkbox"
       className="checkbox"
       onChange={async e => {
+        if (!user) return;
         let favsClone = [...user.favoriteTransactions];
         if
          (user.favoriteTransactions.includes(transactionId)){
@@ -81,17 +82,6 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
           } else{
             favsClone = [...user.favoriteTransactions, transactionId];
           }
-         
-
-        // let mutatedFavsClone = !newFavs.includes(e.target.value)
-        //   ? [...favsClone, e.target.value]
-        //   : favsClone.filter(fav => fav === e.target.value);
-        // const isChecked = e.target.checked;
-        // setTxid(e.target.value);
-
-        // !isChecked && newFavs.includes(e.target.value)
-        //   ? setNewFavs(newFavs.filter(fav => fav !== e.target.value))
-        //   : setNewFavs([...newFavs, e.target.value]);
         let updatedUser;
         try {
          updatedUser = await updateUserMutation({ ...user, favoriteTransactions: favsClone });
