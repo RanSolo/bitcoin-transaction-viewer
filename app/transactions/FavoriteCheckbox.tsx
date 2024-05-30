@@ -12,7 +12,8 @@ interface Props {
 
 const FavoriteCheckbox = ({ user, transactionId }: Props) => {
   const [updatedUser, setUpdatedUser] = useState<User>();
-  const updateUserMutation = async (userToUpdate: any) => {
+  
+  const updateUserMutation =  (userToUpdate: any) => {
     let baseURL = "";
     if (process.env.NODE_ENV === "development") {
       baseURL = "http://localhost:3000";
@@ -21,7 +22,7 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
     }
     let response;
     try {
-      response = await axios({
+      response = axios({
         method: "PUT",
         url: `/api/users/${userToUpdate?.id}`,
         headers: {
@@ -44,8 +45,6 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
     if (!response) {
       throw new Error("Failed to update user");
     }
-
-    return response.data;
   };
   // const mutation = useMutation({
   //   mutationFn: updateUserMutation,
@@ -79,9 +78,7 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
          (user.favoriteTransactions.includes(transactionId)){
         favsClone = favsClone.filter((fav) => fav !== transactionId);
           [...user.favoriteTransactions, transactionId];  
-          console.log('includes')
           } else{
-
             favsClone = [...user.favoriteTransactions, transactionId];
           }
          
@@ -101,7 +98,6 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
         } catch (error) {
           console.log("error", error);
         }
-        console.log("updatedUser", updatedUser);
       }}
       defaultChecked={isFavorite || undefined}
     />
