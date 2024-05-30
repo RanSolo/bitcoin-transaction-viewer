@@ -16,10 +16,8 @@ const TransactionTable = async ({ address, transactions }: Props) => {
   } else {
     baseURL = "https://bitcoin-transaction-viewer-rho.vercel.app/";
   }
-  const response = await fetch(`${baseURL}/api/users/1`, { cache: "no-store" });
-  const currentUser = await response.json();
-  console.log("currentUser", currentUser);
-  console.log("response", response);
+  const response = await axios.get(`${baseURL}/api/users/1`);
+  const currentUser = await response.data;
 
   return (
     <table className="table table-bordered">

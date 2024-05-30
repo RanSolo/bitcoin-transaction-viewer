@@ -15,6 +15,7 @@ export async function GET(request: NextRequest, { params: { address } }: Props) 
   });
 
   const body = await addresses.getAddressTxs({ address });
+  console.log("body", body);
 
   return NextResponse.json(body, { status: 200 });
 }
