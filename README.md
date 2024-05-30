@@ -14,6 +14,7 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 To make a user in your local database you need to send a POST http://localhost:3000/api/users with the following body:
+
 ```json
 {
     "name": "your name",
