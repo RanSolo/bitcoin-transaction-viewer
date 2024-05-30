@@ -16,7 +16,7 @@ const TransactionTable = async ({ address, transactions }: Props) => {
   } else {
     baseURL = "https://bitcoin-transaction-viewer-rho.vercel.app/";
   }
-  let response = { data: {} };
+  let response = { data: { id: "", favoriteTransactions: [] } };
   try {
     response = await axios.get(`${baseURL}/api/users/1`);
   } catch (error) {
