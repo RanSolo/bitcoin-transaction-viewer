@@ -11,8 +11,7 @@ interface Props {
 }
 
 const FavoriteCheckbox = ({ user, transactionId }: Props) => {
-  console.log("userssfsf", user);
-
+  const [updatedUser, setUpdatedUser] = useState<User>();
   const updateUserMutation = async (userToUpdate: any) => {
     let baseURL = "";
     if (process.env.NODE_ENV === "development") {
@@ -75,7 +74,18 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
       type="checkbox"
       className="checkbox"
       onChange={async e => {
-        const favsClone = [...user.favoriteTransactions, transactionId];
+        let favsClone = [...user.favoriteTransactions];
+        if
+         (user.favoriteTransactions.includes(transactionId)){
+        favsClone = favsClone.filter((fav) => fav !== transactionId);
+          [...user.favoriteTransactions, transactionId];  
+          console.log('includes')
+          } else{
+
+            favsClone = [...user.favoriteTransactions, transactionId];
+          }
+         
+
         // let mutatedFavsClone = !newFavs.includes(e.target.value)
         //   ? [...favsClone, e.target.value]
         //   : favsClone.filter(fav => fav === e.target.value);
@@ -88,7 +98,6 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
         let updatedUser;
         try {
          updatedUser = await updateUserMutation({ ...user, favoriteTransactions: favsClone });
-          
         } catch (error) {
           console.log("error", error);
         }
