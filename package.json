@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev && prisma generate && prisma migrate dev --name init",
-    "build": "prisma generate && next build",
+    "build": "prisma generate && prisma migrate deploy && next build",
     "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint"
@@ -16,6 +16,7 @@
     "@types/node": "20.12.12",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
+    "@vercel/postgres": "^0.8.0",
     "autoprefixer": "10.4.19",
     "axios": "^1.7.2",
     "eslint": "8.57.0",
