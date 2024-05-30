@@ -70,8 +70,8 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
       value={transactionId}
       type="checkbox"
       className="checkbox"
-      onChange={async e => {
-        if (!user) return;
+      onChange={ e => {
+
         let favsClone = [...user.favoriteTransactions];
         if
          (user.favoriteTransactions.includes(transactionId)){
@@ -82,7 +82,7 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
           }
         let updatedUser;
         try {
-         updatedUser = await updateUserMutation({ ...user, favoriteTransactions: favsClone });
+         updatedUser = updateUserMutation({ ...user, favoriteTransactions: favsClone });
         } catch (error) {
           console.log("error", error);
         }
