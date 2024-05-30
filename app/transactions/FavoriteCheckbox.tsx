@@ -14,19 +14,35 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
   console.log("userssfsf", user);
 
   const updateUserMutation = async (userToUpdate: any) => {
-    const response = await fetch(`/api/users/${user.id}`, {
+    let baseURL = "";
+    if (process.env.NODE_ENV === "development") {
+      baseURL = "http://localhost:3000";
+    } else {
+      baseURL = "https://bitcoin-transaction-viewer-rho.vercel.app/";
+    }
+
+    const response = await axios({
       method: "PUT",
+      url: `${baseURL}/api/users/${user.id}`,
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(userToUpdate)
+      data: userToUpdate
     });
 
-    if (!response.ok) {
+    // const response = await fetch(`/api/users/${user.id}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(userToUpdate)
+    // });
+
+    if (!response) {
       throw new Error("Failed to update user");
     }
 
-    return response.json();
+    return response.data;
   };
   useEffect(
     () => {

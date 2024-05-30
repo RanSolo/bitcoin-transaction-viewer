@@ -2,6 +2,7 @@ import React from "react";
 import TransactionTable from "./TransactionTable";
 import { Tx } from "@mempool/mempool.js/lib/interfaces/bitcoin/transactions";
 import AddressSearch from "./AddressSearch";
+import axios from "axios";
 
 interface Props {
   params: { address: string };
@@ -16,7 +17,15 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const TransactionsByAddress = async ({ params, searchParams: { address: searchAddress } }: Props) => {
-  const response = await fetch(`${baseURL}/api/transactions/${searchAddress}`);
+  let response = { status: 404, data: [] };
+  if (searchAddress)
+    response = await axios({
+      method: "GET",
+      url: `${baseURL}/api/transactions/${searchAddress}`,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
 
   if (response.status !== 200) {
     return (
@@ -27,7 +36,7 @@ const TransactionsByAddress = async ({ params, searchParams: { address: searchAd
     );
   }
 
-  const transactions: Tx[] = await response.json();
+  const transactions: Tx[] = response.data;
 
   return (
     <div>

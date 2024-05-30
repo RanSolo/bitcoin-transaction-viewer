@@ -13,11 +13,8 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   const body = await request.json();
   const user = await prisma.user.findUnique({ where: { email: body.email } });
-  console.log("user", user);
-  if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
-  console.log("body", body);
-  console.log("params.id", params.id);
+  if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
   const updatedUser = await prisma.user.update({
     where: { id: parseInt(params.id) },
