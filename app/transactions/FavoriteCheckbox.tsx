@@ -20,7 +20,7 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
     } else {
       baseURL = "https://bitcoin-transaction-viewer-rho.vercel.app/";
     }
-    let response = { data: {} };
+    let response;
     try {
       response = await axios({
         method: "PUT",
@@ -85,8 +85,13 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
         // !isChecked && newFavs.includes(e.target.value)
         //   ? setNewFavs(newFavs.filter(fav => fav !== e.target.value))
         //   : setNewFavs([...newFavs, e.target.value]);
-
-        const updatedUser = await updateUserMutation({ ...user, favoriteTransactions: favsClone });
+        let updatedUser;
+        try {
+         updatedUser = await updateUserMutation({ ...user, favoriteTransactions: favsClone });
+          
+        } catch (error) {
+          console.log("error", error);
+        }
         console.log("updatedUser", updatedUser);
       }}
       defaultChecked={isFavorite || undefined}
