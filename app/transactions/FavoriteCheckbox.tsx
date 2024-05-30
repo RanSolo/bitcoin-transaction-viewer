@@ -20,15 +20,19 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
     } else {
       baseURL = "https://bitcoin-transaction-viewer-rho.vercel.app/";
     }
-
-    const response = await axios({
-      method: "PUT",
-      url: `${baseURL}/api/users/${user.id}`,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: userToUpdate
-    });
+    let response = {};
+    try {
+      response = await axios({
+        method: "PUT",
+        url: `${baseURL}/api/users/${user.id}`,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: userToUpdate
+      });
+    } catch (error) {
+      console.log("ERROR: ", error);
+    }
 
     // const response = await fetch(`/api/users/${user.id}`, {
     //   method: "PUT",

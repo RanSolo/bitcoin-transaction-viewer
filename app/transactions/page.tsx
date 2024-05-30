@@ -19,13 +19,17 @@ if (process.env.NODE_ENV === "development") {
 const TransactionsByAddress = async ({ params, searchParams: { address: searchAddress } }: Props) => {
   let response = { status: 404, data: [] };
   if (searchAddress)
-    response = await axios({
-      method: "GET",
-      url: `${baseURL}/api/transactions/${searchAddress}`,
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+    try {
+      response = await axios({
+        method: "GET",
+        url: `${baseURL}/api/transactions/${searchAddress}`,
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+    } catch (error) {
+      console.log("Error: ", error);
+    }
 
   if (response.status !== 200) {
     return (
