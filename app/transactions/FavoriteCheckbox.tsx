@@ -63,8 +63,6 @@ const FavoriteCheckbox = ({ user, transactionId }: Props) => {
   // });
 
   const isFavorite = user?.favoriteTransactions.includes(transactionId);
-  console.log("isFavorite", isFavorite);
-
   return (
     <input
       title="favorite"
