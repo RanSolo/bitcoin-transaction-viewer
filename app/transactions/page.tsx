@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const TransactionsByAddress = async ({ params, searchParams: { address: searchAddress } }: Props) => {
-  let response = { status: 404, data: [] };
+  let response;
   if (searchAddress)
     try {
       response = await axios({
@@ -31,7 +31,7 @@ const TransactionsByAddress = async ({ params, searchParams: { address: searchAd
       console.log("Error: ", error);
     }
 
-  if (response.status !== 200) {
+  if (response?.status !== 200) {
     return (
       <div>
         <AddressSearch defaultAddress={searchAddress} />
