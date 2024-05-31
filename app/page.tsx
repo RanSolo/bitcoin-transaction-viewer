@@ -1,5 +1,5 @@
 import Image from "next/image";
 
 export default function Home() {
-  return <div>Bitcoin Transaction Viewer</div>;
+  return <div className="header mt-5">AnchorWatch Code Challenge</div>;
 }
