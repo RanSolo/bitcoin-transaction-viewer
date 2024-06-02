@@ -3,6 +3,10 @@
 ## Info
 
 There are only two client side components that handle the SearchInput and the Checkbox.  Everything else is rendered server-side.  I used the app router for the first time, which was fun!  It’s odd and satisfying to use async/await in the server side components.
+[![Image from Gyazo](https://i.gyazo.com/544bbef91b378eab1d62e420eaa35eb0.gif)](https://gyazo.com/544bbef91b378eab1d62e420eaa35eb0)
+
+See the how the loading state is only there the first time we click to Transactions.
+
 
 ## Deployed at
 
@@ -10,9 +14,10 @@ There are only two client side components that handle the SearchInput and the Ch
 
 ## Transaction Viewer features
 
+- You can search for transactions by their address hash which is rendered server side using a query string parameter.
+  [![Image from Gyazo](https://i.gyazo.com/3923757b2413510e692b3e68f6ea69fb.gif)](https://gyazo.com/3923757b2413510e692b3e68f6ea69fb)
 - You can save your favorite transactions and they will persist across sessions.
-- The onChange saves your selection to the data.  
-- You can search for transactions by their address hash which is rendered server side using a query string parameter.  
+- The onChange event saves your selection to the database.  
 - A directive displays when no address matches.
 - data is fetched from the api and displayed in a table.
 - The filters are set up to work using query parameters, but I don't know the data that well so I didn't implement them.
@@ -24,6 +29,7 @@ Authorization through google provider is now live.  Send me your gmail account a
 - The user clicks login and is redirected to google to authorize the app.  Then they are redirected back to the app.
 - I get the session and display the picture and email of the user.
 - I toggle login and logout buttons based on if the user is authorized or not.  
+[![Image from Gyazo](https://i.gyazo.com/6ddced6f7512ab3be2c07c1fafafa8f7.gif)](https://gyazo.com/6ddced6f7512ab3be2c07c1fafafa8f7)
 
 ## UI/UX
 
