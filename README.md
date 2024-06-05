@@ -32,7 +32,7 @@ Authorization through google provider is now live.  Send me your gmail account a
 
 ### Future steps
 
-- the favorites do save to the database, but they are not associated to a user.  This was just a quick way to get the functionality working.
+- the favorites do save to the database, but they are not associated to a user.  This was just a quick way to get the functionality working.  Add pg adapter for Next Auth.
 - Protect all routes
 - Match the figma designs
 - Display correct data fields in the table, the figma designs did not mirror to the data returned from the api.
@@ -53,7 +53,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Then you should be able to save favorite transactions by clicking the checkbox in their row.
+Save favorite transactions by clicking the checkbox in their row.
 
 ## Deployed on Vercel
 
